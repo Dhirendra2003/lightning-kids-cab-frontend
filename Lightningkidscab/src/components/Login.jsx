@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Schedule from "./Schedule";
 import { useNavigate } from "react-router-dom";
-// import { toast } from "react-toastify/unstyled";
+import { toast } from "react-toastify/unstyled";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
@@ -14,14 +14,14 @@ const Login = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/api/v1/user/login",
+        "http://192.168.1.27:3000/api/v1/user/login",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ email, password }),
-          credentials:'include'
+          credentials: "include",
         }
       );
 
@@ -30,18 +30,16 @@ const Login = () => {
       const data = await response.json();
       // console.log("Response from API:", data);
 
-      // localStorage.setItem("token", data.token);
-    //   Cookies.set("token", data.token, { expires: 7 }); 
-      console.log(data)
+      localStorage.setItem("token", data.token);
+      // document.cookie = `token=${data.token}; path=/; secure; samesite=strict`;
 
-    //   toast.success("Form Submitted Successfully");
-    //   setEmail("");
-    //   setPassword("");
-    //   navigate("/addchild");
-
+      toast.success("Form Submitted Successfully");
+      setEmail("");
+      setPassword("");
+      navigate("/addchild");
     } catch (error) {
       console.error("Error:", error);
-    //   toast.error("Failed to submit form");
+      toast.error("Failed to submit form");
     }
   };
 
