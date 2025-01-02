@@ -1,36 +1,33 @@
-import { useState } from 'react'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
-import './App.css'
-import Signup from './components/Signup'
-import Login from './components/Login'
-import AddChild from './components/AddChild';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "./App.css";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
+import AddChild from "./components/AddChild";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const router= createBrowserRouter([
-
+  const router = createBrowserRouter([
     {
-      path:'/signup',
-      element:<Signup />
+      path: "/signup",
+      element: <Signup />,
     },
     {
-      path:'/login',
-      element:<Login />
+      path: "/login",
+      element: <Login />,
     },
     {
-      path:'/addchild',
-      element:<AddChild />
-    }
-
-  ]
-
-  )
+      path: "/addchild",
+      element: <AddChild />,
+    },
+  ]);
 
   return (
     <>
-    <RouterProvider router={router} />
+      <ToastContainer />
+      <RouterProvider router={router} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
